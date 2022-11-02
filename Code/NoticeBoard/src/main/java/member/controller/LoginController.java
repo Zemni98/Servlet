@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.service.MemberService;
 import member.vo.Member;
@@ -65,9 +66,12 @@ public class LoginController extends HttpServlet {
 			// 사용자의 이름을 찍어야하는데 이름이 member라는 객체안에있다.
 			// member VO 객체를 JSP에게 전달해야한다.
 			// 즉, Controller Servlet이 request를 전달해서 다른 Servlet(JSP)을 호출하는 개념
-			RequestDispatcher rd = request.getRequestDispatcher("/book/bookSearch.html");
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id);
+			RequestDispatcher rd = request.getRequestDispatcher("main/main.jsp");
 			request.setAttribute("member", member);
 			rd.forward(request, response);
+
 			// request.getDispatcherType();
 		} else {
 			response.sendRedirect("/NoticeBoard/user/loginFail.html"); // 잘못되었을때 클라이언트에게 보내줄 HTML을 여기에다가 적으면된다.

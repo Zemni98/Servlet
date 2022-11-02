@@ -1,4 +1,4 @@
-package member.dao;
+package post.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,13 +10,13 @@ import javax.sql.DataSource;
 
 import member.vo.Member;
 
-public class MemberDAO {
+public class postDAO {
 
 	private DataSource ds;
 	private Connection con;
 	private ResultSet rs;
 
-	public MemberDAO() throws Exception {
+	public postDAO() throws Exception {
 
 		Context init = new InitialContext();
 		ds = (DataSource) init.lookup("java:comp/env/jdbc/MySQLDB");

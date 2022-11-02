@@ -41,7 +41,7 @@ public class SignUpController extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException, NullPointerException {
 		// 1. 입력
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("userNAME");
@@ -58,15 +58,16 @@ public class SignUpController extends HttpServlet {
 		member.setPw(pw);
 
 		MemberService service = new MemberService();
-		member = service.join(member); // member data를 사용하니까 member data의 VO를 만들어서 인자로 VO를 넘겨준다.
+		member = service.join(member); // member data를 사용하니까 member data의 VO를 만들어서
+		// 인자로 VO를 넘겨준다.
+		// 인자로 VO를 넘겨준다.
 		// 그럴려면 Class가 있어야지..
 		// 그래서??? VO를 만들러 가야지.. 슈웅~!
 		// 3.출력
 		// Login에 성공하면 VO객체안에 Login한 사람의 name이 들어가있다.
-		if (member.getName() == null) {
-			response.sendRedirect("/NoticeBoard/user/loginFail.html");
-		} else {
-			response.sendRedirect("/NoticeBoard/user/login.html"); // 잘못되었을때 클라이언트에게 보내줄 HTML을 여기에다가 적으면된다.
+		if (member != null) {
+
+			response.sendRedirect("/NoticeBoard/user/login.html");
 		}
 
 	}
